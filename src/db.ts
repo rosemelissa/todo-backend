@@ -9,6 +9,11 @@ export interface DbItemWithId extends DbItem {
   id: number;
 }
 
+export interface UserInputsDBItem {
+  task: string;
+  dueDate: string;
+}
+
 const db: DbItemWithId[] = [];
 
 /** Variable to keep incrementing id of database items */
@@ -25,8 +30,6 @@ export const addDummyDbItems = (n: number): DbItemWithId[] => {
   for (let count = 0; count < n; count++) {
     const createdSignature = addDbItem({
       task: 'Do this thing',
-      completed: false,
-      creationDate: 'A date',
       dueDate: 'Another date'
     });
     createdSignatures.push(createdSignature);
@@ -40,9 +43,11 @@ export const addDummyDbItems = (n: number): DbItemWithId[] => {
  * @param data - the item data to insert in
  * @returns the item added (with a newly created id)
  */
-export const addDbItem = (data: DbItem): DbItemWithId => {
+export const addDbItem = (data: UserInputsDBItem): DbItemWithId => {
   const newEntry: DbItemWithId = {
     id: ++idCounter,
+    completed: false,
+    creationDate: new Date().toISOString(),
     ...data,
   };
   db.push(newEntry);
