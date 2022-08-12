@@ -8,6 +8,7 @@ import {
   getDbItemById,
   DbItem,
   updateDbItemById,
+  deleteDbItemById,
 } from "./db";
 import filePath from "./filePath";
 
@@ -65,6 +66,7 @@ app.delete<{ id: string }>("/items/:id", (req, res) => {
   if (matchingSignature === "not found") {
     res.status(404).json(matchingSignature);
   } else {
+    deleteDbItemById(parseInt(req.params.id));
     res.status(200).json(matchingSignature);
   }
 });
