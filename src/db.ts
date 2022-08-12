@@ -30,7 +30,7 @@ export const addDummyDbItems = (n: number): DbItemWithId[] => {
   for (let count = 0; count < n; count++) {
     const createdSignature = addDbItem({
       task: 'Do this thing',
-      dueDate: 'Another date'
+      dueDate: '2022-05-04'
     });
     createdSignatures.push(createdSignature);
   }
